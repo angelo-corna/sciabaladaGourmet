@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd  
+	http://www.springframework.org/schema/context  
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">  
+
+	<context:component-scan base-package="software.trentanove.sciabaladaGourmet.controllers"/>
+
+	<context:property-placeholder location="file://${HOME}/security/.telegram.properties" />
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<bean id="ds" class="org.springframework.jndi.JndiObjectFactoryBean">
+	    <property name="jndiName" value="java:comp/env/jdbc/scbgdb"/>
+	</bean>
+
+	<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="ds"></property>
+	</bean>
+	<bean id="jtNamed" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="ds"/>
+	</bean>
+	
+	<bean id="dao" class="software.trentanove.sciabaladaGourmet.dao.EvaluationsDao">
+		<property name="template" ref="jt"></property>
+	</bean>
+	<bean id="daoNamed" class="software.trentanove.sciabaladaGourmet.dao.EvaluationsDao">
+		<property name="namedParameterTemplate" ref="jtNamed"></property>
+	</bean>
+		
+	<mvc:resources mapping="css/**" location="/WEB-INF/css/"/>
+	<mvc:resources mapping="images/**" location="/WEB-INF/images/"/>
+	<mvc:resources mapping="images/gamers/**" location="/WEB-INF/images/gamers"/>
+	<mvc:annotation-driven />
+	
+	
+	
+</beans>
