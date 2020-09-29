@@ -13,7 +13,8 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-import software.trentanove.sciabaladaGourmet.beans.Dinner;  
+import software.trentanove.sciabaladaGourmet.beans.Dinner;
+import software.trentanove.sciabaladaGourmet.beans.Evaluations;  
   
 public class EvaluationsDao {  
 	
@@ -121,4 +122,50 @@ public class EvaluationsDao {
 	        }  
 	    });  
 	} 
+	
+	public Dinner getDinnerById( String id ){  
+		List<Dinner> dinnersList = template.query("select id, dinnerDate, resturant, city from dinners where id = ?", new Object[] {id},new RowMapper<Dinner>(){
+	        public Dinner mapRow(ResultSet rs, int row) throws SQLException {  
+	        	Dinner d=new Dinner();  
+	            d.setId(rs.getInt(1)); 
+	            d.setDinnerDate(rs.getString(2)); 
+	            d.setResturant(rs.getString(3)); 
+	            d.setCity(rs.getString(4)); 
+	            return d;  
+	        }  
+	    }); 
+		return dinnersList.get(0);
+	} 
+	
+	public Evaluations getEvaluationByDinnerId( String id, String participant ){  
+		List<Evaluations> evaluationsList = template.query("select location, menu, service, bill from evaluations where dinner_id = ? and participant = ?", new Object[] {id, participant},new RowMapper<Evaluations>(){
+	        public Evaluations mapRow(ResultSet rs, int row) throws SQLException {  
+	        	Evaluations e=new Evaluations();  
+	        	Integer location = rs.getInt(1);
+	        	if (rs.wasNull()) {
+	        		location = null;
+	        	}
+	            e.setLocation(location); 
+	        	Integer menu = rs.getInt(2);
+	        	if (rs.wasNull()) {
+	        		menu = null;
+	        	}
+	            e.setMenu(menu);
+	        	Integer service = rs.getInt(3);
+	        	if (rs.wasNull()) {
+	        		service = null;
+	        	}
+	            e.setService(service); 
+	        	Integer bill = rs.getInt(4);
+	        	if (rs.wasNull()) {
+	        		bill = null;
+	        	}
+	            e.setBill(bill); 
+	            return e;  
+	        }  
+	    });  
+		return evaluationsList.get(0);
+	} 
+	
+ 
 }  

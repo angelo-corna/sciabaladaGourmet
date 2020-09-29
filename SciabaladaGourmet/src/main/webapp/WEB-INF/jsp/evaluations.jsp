@@ -48,8 +48,8 @@
 					<td align="center"><H5W>&nbsp</H5W></td>
 				</tr>
 		    	<tr>
-					<td align="center"><a href="dinnerEvaluatiion/${dinner.id}"><H32W>${dinner.dinnerDate}</H32W></<a></td>
-					<td align="left" width="50%"><a href="dinnerEvaluatiion/${dinner.id}"><H32W>&nbsp&nbsp${dinner.resturant}</H32W></<a></td>
+					<td align="center"><a href="dinnerEvaluation/${dinner.id}"><H32W>${dinner.dinnerDate}</H32W></<a></td>
+					<td align="left" width="50%"><a href="dinnerEvaluation/${dinner.id}"><H32W>&nbsp&nbsp${dinner.resturant}</H32W></<a></td>
 					<script type="text/javascript">
 						var jsEval= [[${game.evaluated}]];
 						if( jsEval == true ){

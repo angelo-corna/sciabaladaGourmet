@@ -19,6 +19,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import software.trentanove.sciabaladaGourmet.beans.Dinner;
+import software.trentanove.sciabaladaGourmet.beans.Evaluations;
 import software.trentanove.sciabaladaGourmet.dao.EvaluationsDao;  
 
 @Controller  
@@ -54,7 +55,7 @@ public class EvaluationsController {
     
     @RequestMapping("/dinnerNotSaved/{dinnerDate}")  
     public String dinnerNotSaved(@PathVariable String dinnerDate, Model m){  
-        List<Dinner> dinnersByDateList = dao.getDinnerByDate(dinnerDate);  
+    	List<Dinner> dinnersByDateList = dao.getDinnerByDate(dinnerDate);  
         Dinner dinner = dinnersByDateList.get(0);
         List<String> dinnerParticipants = daoNamed.getDinnerParticipants(dinner);
         m.addAttribute("dinnerDate",dinnerDate);
@@ -91,8 +92,7 @@ public class EvaluationsController {
     
     @RequestMapping("/evaluations")
     public String evaluations(Model m, Principal principal) {
-        String currentTomcatUser = principal.getName();
-        String currentUser = currentTomcatUser.substring(0, 1).toUpperCase() + currentTomcatUser.substring(1).toLowerCase();
+        String currentUser = getCurrentUser(principal);
         List<Dinner> userDinners = dao.getUserDinners(currentUser);
         int totalDinners = userDinners.size();
     	m.addAttribute("currentUser", currentUser);
@@ -101,6 +101,52 @@ public class EvaluationsController {
     	return "evaluations";  
     }
     
+    @RequestMapping("/dinnerEvaluation/{id}")  
+    public String dinnerEvaluation(@PathVariable String id, Model m, Principal principal){  
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+        
+    	//get dinner data
+    	Dinner dinner = dao.getDinnerById(id); 
+        
+        //get evaluation data
+    	Evaluations evaluations = dao.getEvaluationByDinnerId(id, currentUser); 
+    	
+    	/*
+    	String location = "n.g.";
+    	System.out.println(evaluations.getLocation());
+    	Integer locationNum = evaluations.getLocation();
+    	if (locationNum != null) {
+    		location = String.valueOf(locationNum);
+    	}
+    	*/
+
+    	m.addAttribute("currentUser", currentUser);
+        m.addAttribute("dinnerDate",dinner.getDinnerDate());
+        m.addAttribute("resturant",dinner.getResturant());
+        m.addAttribute("location",formatEvaluation(evaluations.getLocation()));
+        m.addAttribute("menu",formatEvaluation(evaluations.getMenu()));
+        m.addAttribute("service",formatEvaluation(evaluations.getService()));
+        m.addAttribute("bill",formatEvaluation(evaluations.getBill()));
+        m.addAttribute("id",id);
+
+        return "dinnerEvaluation";  
+    }  
+    
+    public String getCurrentUser(Principal principal) {
+    	String currentTomcatUser = principal.getName();
+        return currentTomcatUser.substring(0, 1).toUpperCase() + currentTomcatUser.substring(1).toLowerCase();
+    	
+    }
+    
+    public String formatEvaluation(Integer eval) {
+       	String evaluation = "n.g.";
+       	if(eval != null) {
+       		evaluation = String.valueOf(eval);
+       	}
+       	return evaluation;
+    }
 
 }  
 
