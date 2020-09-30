@@ -32,6 +32,35 @@ H1W{
 	font-size: 80px;
 }
 
+H0W{
+	color: white;
+	
+	vertical-align: bottom;
+	
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 150px;
+}
+
+H0B{
+	color: black;
+	
+	vertical-align: bottom;
+	
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 150px;
+}
+
+H0O{
+	color: orange;
+	
+	vertical-align: bottom;
+	
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 150px;
+}
 H3O{
 	color: orange;
 	

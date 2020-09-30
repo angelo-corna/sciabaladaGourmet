@@ -167,5 +167,20 @@ public class EvaluationsDao {
 		return evaluationsList.get(0);
 	} 
 	
+	public void saveLocationEvaluation(int dinnerId, String participant, String eval){  
+		template.update("update evaluations set location=? where dinner_id=? and participant=?",new Object[] {eval, dinnerId, participant});
+	} 
+	
+	public void saveMenuEvaluation(int dinnerId, String participant, String eval){  
+		template.update("update evaluations set menu=? where dinner_id=? and participant=?",new Object[] {eval, dinnerId, participant});
+	} 
  
+	public void saveServiceEvaluation(int dinnerId, String participant, String eval){  
+		template.update("update evaluations set service=? where dinner_id=? and participant=?",new Object[] {eval, dinnerId, participant});
+	} 
+	
+	public void saveBillEvaluation(int dinnerId, String participant, String eval){  
+		template.update("update evaluations set bill=? where dinner_id=? and participant=?",new Object[] {eval, dinnerId, participant});
+	} 
+
 }  

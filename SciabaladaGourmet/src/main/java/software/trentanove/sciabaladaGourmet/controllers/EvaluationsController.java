@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import software.trentanove.sciabaladaGourmet.beans.Dinner;
 import software.trentanove.sciabaladaGourmet.beans.Evaluations;
@@ -112,15 +114,6 @@ public class EvaluationsController {
         
         //get evaluation data
     	Evaluations evaluations = dao.getEvaluationByDinnerId(id, currentUser); 
-    	
-    	/*
-    	String location = "n.g.";
-    	System.out.println(evaluations.getLocation());
-    	Integer locationNum = evaluations.getLocation();
-    	if (locationNum != null) {
-    		location = String.valueOf(locationNum);
-    	}
-    	*/
 
     	m.addAttribute("currentUser", currentUser);
         m.addAttribute("dinnerDate",dinner.getDinnerDate());
@@ -134,6 +127,132 @@ public class EvaluationsController {
         return "dinnerEvaluation";  
     }  
     
+    @RequestMapping("dinnerEvaluation/locationEvaluation/{id}")  
+    public String locationEvaluation(@PathVariable String id, Model m, Principal principal){  
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+        
+    	//get dinner data
+    	Dinner dinner = dao.getDinnerById(id); 
+
+    	m.addAttribute("currentUser", currentUser);
+        m.addAttribute("dinnerDate",dinner.getDinnerDate());
+        m.addAttribute("resturant",dinner.getResturant());
+
+        return "dinnerEvaluation/locationEvaluation";  
+    }  
+    
+    @RequestMapping("dinnerEvaluation/menuEvaluation/{id}")  
+    public String menuEvaluation(@PathVariable String id, Model m, Principal principal){  
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+        
+    	//get dinner data
+    	Dinner dinner = dao.getDinnerById(id); 
+
+    	m.addAttribute("currentUser", currentUser);
+        m.addAttribute("dinnerDate",dinner.getDinnerDate());
+        m.addAttribute("resturant",dinner.getResturant());
+
+        return "dinnerEvaluation/menuEvaluation";  
+    }  
+
+    @RequestMapping("dinnerEvaluation/serviceEvaluation/{id}")  
+    public String serviceEvaluation(@PathVariable String id, Model m, Principal principal){  
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+        
+    	//get dinner data
+    	Dinner dinner = dao.getDinnerById(id); 
+
+    	m.addAttribute("currentUser", currentUser);
+        m.addAttribute("dinnerDate",dinner.getDinnerDate());
+        m.addAttribute("resturant",dinner.getResturant());
+
+        return "dinnerEvaluation/serviceEvaluation";  
+    }  
+    
+    @RequestMapping("dinnerEvaluation/billEvaluation/{id}")  
+    public String billEvaluation(@PathVariable String id, Model m, Principal principal){  
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+        
+    	//get dinner data
+    	Dinner dinner = dao.getDinnerById(id); 
+
+    	m.addAttribute("currentUser", currentUser);
+        m.addAttribute("dinnerDate",dinner.getDinnerDate());
+        m.addAttribute("resturant",dinner.getResturant());
+
+        return "dinnerEvaluation/billEvaluation";  
+    }  
+
+
+    @RequestMapping("dinnerEvaluation/saveLocationEvaluation/{ideval}")  
+    public String saveLocationEvaluation(@PathVariable String ideval, Model m, Principal principal){  
+    	
+    	//get id and eval
+    	Integer id = Integer.parseInt(ideval.split(",")[0]);
+    	String eval = ideval.split(",")[1];
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+
+        dao.saveLocationEvaluation(id, currentUser, eval);
+        
+        return "redirect:/dinnerEvaluation/"+id;  
+    }  
+
+    @RequestMapping("dinnerEvaluation/saveMenuEvaluation/{ideval}")  
+    public String saveMenuEvaluation(@PathVariable String ideval, Model m, Principal principal){  
+    	
+    	//get id and eval
+    	Integer id = Integer.parseInt(ideval.split(",")[0]);
+    	String eval = ideval.split(",")[1];
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+
+        dao.saveMenuEvaluation(id, currentUser, eval);
+        
+        return "redirect:/dinnerEvaluation/"+id;  
+    }  
+
+    @RequestMapping("dinnerEvaluation/saveServiceEvaluation/{ideval}")  
+    public String saveServiceEvaluation(@PathVariable String ideval, Model m, Principal principal){  
+    	
+    	//get id and eval
+    	Integer id = Integer.parseInt(ideval.split(",")[0]);
+    	String eval = ideval.split(",")[1];
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+
+        dao.saveServiceEvaluation(id, currentUser, eval);
+        
+        return "redirect:/dinnerEvaluation/"+id;  
+    }  
+    
+    @RequestMapping("dinnerEvaluation/saveBillEvaluation/{ideval}")  
+    public String saveBillEvaluation(@PathVariable String ideval, Model m, Principal principal){  
+    	
+    	//get id and eval
+    	Integer id = Integer.parseInt(ideval.split(",")[0]);
+    	String eval = ideval.split(",")[1];
+    	
+    	//get current user
+        String currentUser = getCurrentUser(principal);
+
+        dao.saveBillEvaluation(id, currentUser, eval);
+        
+        return "redirect:/dinnerEvaluation/"+id;  
+    }  
+
+
     public String getCurrentUser(Principal principal) {
     	String currentTomcatUser = principal.getName();
         return currentTomcatUser.substring(0, 1).toUpperCase() + currentTomcatUser.substring(1).toLowerCase();

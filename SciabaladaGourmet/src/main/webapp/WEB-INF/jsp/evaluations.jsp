@@ -53,9 +53,9 @@
 					<script type="text/javascript">
 						var jsEval= [[${game.evaluated}]];
 						if( jsEval == true ){
-							var output = "<td align=\"center\"><H32W><img src=\"images/select.png\"></H32W></td>"						
+							var output = "<td align=\"center\"><H32W><img src=\"images/select.png\"></H32W></td>"	;					
 						}else{
-							var output = "<td align=\"center\"><H32W>&nbsp<H32W></td>"						
+							var output = "<td align=\"center\"><H32W>&nbsp<H32W></td>";					
 						}
 						document.write(output);
 					</script>

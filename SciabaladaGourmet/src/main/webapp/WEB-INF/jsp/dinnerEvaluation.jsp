@@ -41,11 +41,11 @@
 				</td>
 			</tr>
 			<tr>
-				<td><H4O>&nbsp</H4O></td>
+				<td><H1O>&nbsp</H1O></td>
 			</tr>
 			<tr>
 				<td align="center">
-					<a href="locationEvaluation/${id}"><H1W>Location: ${location} </H1W></a>
+					<a href="locationEvaluation/${id}"><H3W>Location: ${location} </H3W></a>
 				</td>
 			</tr>
 			<tr>
@@ -53,7 +53,7 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<a href="menuEvaluation/${id}"><H1W>Menu: ${menu} </H1W></a>
+					<a href="menuEvaluation/${id}"><H3W>Menu: ${menu} </H3W></a>
 				</td>
 			</tr>
 			<tr>
@@ -61,7 +61,7 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<a href="serviceEvaluation/${id}"><H1W>Servizio: ${service} </H1W></a>
+					<a href="serviceEvaluation/${id}"><H3W>Servizio: ${service} </H3W></a>
 				</td>
 			</tr>
 			<tr>
@@ -69,7 +69,7 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<a href="billEvaluation/${id}"><H1W>Conto: ${bill} </H1W></a>
+					<a href="billEvaluation/${id}"><H3W>Conto: ${bill} </H3W></a>
 				</td>
 			</tr>
 		</table>  
