@@ -22,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import software.trentanove.sciabaladaGourmet.beans.Dinner;
 import software.trentanove.sciabaladaGourmet.beans.Evaluations;
+import software.trentanove.sciabaladaGourmet.beans.ResturantScore;
+import software.trentanove.sciabaladaGourmet.beans.Score;
 import software.trentanove.sciabaladaGourmet.dao.EvaluationsDao;  
 
 @Controller  
@@ -251,12 +253,38 @@ public class EvaluationsController {
         
         return "redirect:/dinnerEvaluation/"+id;  
     }  
+    
+    @RequestMapping("score")  
+    public String score(){  
+        return "score";  
+    } 
+
+    @RequestMapping("generalScore")  
+    public String generalScore(Model m){  
+    	List<Score> scoreList = dao.getGeneralScore();
+    	m.addAttribute("scoreList", scoreList);
+    	m.addAttribute("totalScores", scoreList.size());
+        return "generalScore";  
+    } 
+    
+    @RequestMapping("resturantScores/{resturant}")  
+    public String resturantScores(@PathVariable String resturant, Model m){  
+       	//get resturant and city
+    	String rest = resturant.split(",")[0];
+    	String city = resturant.split(",")[1];
+    	
+    	List<ResturantScore> resturantScoresList = dao.getResturantScores(rest, city);
+    	m.addAttribute("resturant", rest);
+    	m.addAttribute("city", city);
+    	m.addAttribute("resturantScoresList", resturantScoresList);
+    	m.addAttribute("totalResturantScores", resturantScoresList.size());
+        return "resturantScores";  
+    } 
 
 
     public String getCurrentUser(Principal principal) {
     	String currentTomcatUser = principal.getName();
         return currentTomcatUser.substring(0, 1).toUpperCase() + currentTomcatUser.substring(1).toLowerCase();
-    	
     }
     
     public String formatEvaluation(Integer eval) {

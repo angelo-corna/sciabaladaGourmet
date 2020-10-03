@@ -51,8 +51,8 @@
 					<td align="center"><a href="dinnerEvaluation/${dinner.id}"><H32W>${dinner.dinnerDate}</H32W></<a></td>
 					<td align="left" width="50%"><a href="dinnerEvaluation/${dinner.id}"><H32W>&nbsp&nbsp${dinner.resturant}</H32W></<a></td>
 					<script type="text/javascript">
-						var jsEval= [[${game.evaluated}]];
-						if( jsEval == true ){
+						var jsEval = [[${dinner.evaluated}]];
+						if( jsEval == "true" ){
 							var output = "<td align=\"center\"><H32W><img src=\"images/select.png\"></H32W></td>"	;					
 						}else{
 							var output = "<td align=\"center\"><H32W>&nbsp<H32W></td>";					
