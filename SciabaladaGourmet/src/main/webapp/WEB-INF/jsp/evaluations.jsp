@@ -39,17 +39,17 @@
 		<table style="width:100%" align=center>
 			<tr bgcolor="#000000">
 				<td align="center"><H32O>Data</H32O></td>
-				<td align="left" width="50%"><H32O>&nbsp&nbspRistorante</H32O></td>
+				<td align="left"><H32O>&nbsp&nbspRistorante</H32O></td>
 				<td align="center"><H32O>&nbsp</H32O></td>
 			<c:forEach var="dinner" items="${userDinners}"> 
 		    	<tr>
 					<td align="center"><H5W>&nbsp</H5W></td>
-					<td align="left" width="50%"><H5W>&nbsp</H5W></td>
+					<td align="left"><H5W>&nbsp</H5W></td>
 					<td align="center"><H5W>&nbsp</H5W></td>
 				</tr>
 		    	<tr>
 					<td align="center"><a href="dinnerEvaluation/${dinner.id}"><H32W>${dinner.dinnerDate}</H32W></<a></td>
-					<td align="left" width="50%"><a href="dinnerEvaluation/${dinner.id}"><H32W>&nbsp&nbsp${dinner.resturant}</H32W></<a></td>
+					<td align="left"><a href="dinnerEvaluation/${dinner.id}"><H32W>&nbsp&nbsp${dinner.resturant}</H32W></<a></td>
 					<script type="text/javascript">
 						var jsEval = [[${dinner.evaluated}]];
 						if( jsEval == "true" ){
