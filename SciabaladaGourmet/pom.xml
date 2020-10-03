@@ -73,7 +73,7 @@
 		<configuration>
 			<url>http://${hostname}:${port}/manager/text</url>
 			<server>${serverName}</server>
-			<path>/sciabalada</path>
+			<path>/sciabaladaGourmet</path>
 		</configuration>
 	</plugin>  		
 	  
