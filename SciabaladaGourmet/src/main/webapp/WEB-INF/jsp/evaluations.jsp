@@ -40,7 +40,7 @@
 			<tr bgcolor="#000000">
 				<td align="center"><H32O>Data</H32O></td>
 				<td align="left" width="50%"><H32O>&nbsp&nbspRistorante</H32O></td>
-				<td align="center"><H32O>Valutata</H32O></td>
+				<td align="center"><H32O>&nbsp</H32O></td>
 			<c:forEach var="dinner" items="${userDinners}"> 
 		    	<tr>
 					<td align="center"><H5W>&nbsp</H5W></td>
