@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import software.trentanove.sciabaladaGourmet.beans.Dinner;
 import software.trentanove.sciabaladaGourmet.beans.Evaluations;
+import software.trentanove.sciabaladaGourmet.beans.ParticipantScore;
 import software.trentanove.sciabaladaGourmet.beans.ResturantScore;
 import software.trentanove.sciabaladaGourmet.beans.Score;  
   
@@ -186,7 +187,7 @@ public class EvaluationsDao {
 	} 
 	
 	public List<Score> getGeneralScore(){  
-		String sql = "select d.resturant, d.city, (sum(e.location) + sum(e.service) + sum(e.menu) + sum(e.bill) )/ count(*) as generalScore "
+		String sql = "select d.resturant, d.city, (sum(e.location) + sum(e.service) + sum(e.menu) + sum(e.bill) )/ (count(*)*4) as generalScore "
 				+ "from dinners as d inner join evaluations as e on e.dinner_id=d.id "
 				+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
 				+ "group by d.resturant, d.city order by generalScore desc";
@@ -209,12 +210,32 @@ public class EvaluationsDao {
 		return  template.query(sql, new Object[] {resturant, city}, new RowMapper<ResturantScore>(){
 	        public ResturantScore mapRow(ResultSet rs, int row) throws SQLException {  
 	        	ResturantScore r = new ResturantScore();  
+	        	r.setResturant(resturant);
+	        	r.setCity(city);
 	            r.setDinnerDate(rs.getString(1)); 
 	            r.setLocation(rs.getFloat(2)); 
 	            r.setService(rs.getFloat(3)); 
 	            r.setMenu(rs.getFloat(4)); 
 	            r.setBill(rs.getFloat(5)); 
 	            return r;  
+	        }  
+	    }); 
+	} 
+	
+	public List<ParticipantScore> getParticipantScores(String resturant, String city, String dinnerDate){  
+		String sql = "select  e.participant, e.location, e.service, e.menu, e.bill "
+				+ "from dinners as d inner join evaluations as e on e.dinner_id=d.id "
+				+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
+				+ "and d.resturant=? and d.city=? and d.dinnerDate=? order by participant";
+		return  template.query(sql, new Object[] {resturant, city, dinnerDate}, new RowMapper<ParticipantScore>(){
+	        public ParticipantScore mapRow(ResultSet rs, int row) throws SQLException {  
+	        	ParticipantScore p = new ParticipantScore();  
+	            p.setParticipant(rs.getString(1)); 
+	            p.setLocation(rs.getFloat(2)); 
+	            p.setService(rs.getFloat(3)); 
+	            p.setMenu(rs.getFloat(4)); 
+	            p.setBill(rs.getFloat(5)); 
+	            return p;  
 	        }  
 	    }); 
 	} 

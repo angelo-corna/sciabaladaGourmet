@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import software.trentanove.sciabaladaGourmet.beans.Dinner;
 import software.trentanove.sciabaladaGourmet.beans.Evaluations;
+import software.trentanove.sciabaladaGourmet.beans.ParticipantScore;
 import software.trentanove.sciabaladaGourmet.beans.ResturantScore;
 import software.trentanove.sciabaladaGourmet.beans.Score;
 import software.trentanove.sciabaladaGourmet.dao.EvaluationsDao;  
@@ -279,6 +280,22 @@ public class EvaluationsController {
     	m.addAttribute("resturantScoresList", resturantScoresList);
     	m.addAttribute("totalResturantScores", resturantScoresList.size());
         return "resturantScores";  
+    } 
+    
+    @RequestMapping("participantScores/{allData}")  
+    public String participantScores(@PathVariable String allData, Model m){  
+       	//get resturant, city and dinnerDate
+    	String resturant = allData.split(",")[0];
+    	String city = allData.split(",")[1];
+    	String dinnerDate = allData.split(",")[2];
+    	
+    	List<ParticipantScore> participantScoresList = dao.getParticipantScores(resturant, city, dinnerDate);
+    	m.addAttribute("resturant", resturant);
+    	m.addAttribute("city", city);
+    	m.addAttribute("dinnerDate", dinnerDate);
+    	m.addAttribute("participantScoresList", participantScoresList);
+    	m.addAttribute("totalparticipantScores", participantScoresList.size());
+        return "participantScores";  
     } 
 
 

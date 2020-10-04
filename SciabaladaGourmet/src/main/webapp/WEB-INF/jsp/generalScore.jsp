@@ -7,6 +7,13 @@
 		<title>Sciabalada Mobile Gourmet - Classifica</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
 		<link rel="icon" type="image/png" href="images/sciabalada.ico">
+		
+		<script type="text/javascript">
+			function formatScore(score) {
+				document.write("<td align=\"center\"><a href=\"resturantScores/${score.resturant},${score.city}\"><H32W>"+Math.round(score*Math.pow(10,1))/Math.pow(10,1)+"</H32W></<a></td>");
+			}
+		</script>
+		
 	</head>
 	<body>
 		<table style="width:100%" bgcolor="#000000">
@@ -50,7 +57,11 @@
 		    	<tr>
 					<td align="left"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.resturant}</H32W></<a></td>
 					<td align="left"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.city}</H32W></<a></td>
-					<td align="center"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.score}</H32W></<a></td>
+					<script type="text/javascript">
+						var jsScore = [[${score.score}]];
+						formatScore(jsScore);
+					</script>
+					<!-- td align="center"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.score}</H32W></<a></td -->
 				</tr>
 		    </c:forEach> 
 		</table>  

@@ -32,19 +32,21 @@
 			</tr>
 			<tr>
 				<td align="center">
-					<H3O> ${resturant} </H3O>
+					<H32O> ${resturant} </H32O>
 				</td>
 			</tr>
 			<tr>
 				<td align="center">
-					<H3O> ${city} </H3O>
+					<H32O> ${city} </H32O>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<H32O> ${dinnerDate} </H32O>
 				</td>
 			</tr>
 			<tr>
 				<td><H4O>&nbsp</H4O></td>
-			</tr>
-			<tr>
-				<td align="center"><H32W>Totale Valutazioni: ${totalResturantScores}</H32W></td>
 			</tr>
 			<tr>
 				<td><H5O>&nbsp</H5O></td>
@@ -54,12 +56,12 @@
 		<br>
 		<table style="width:100%" align=center>
 			<tr bgcolor="#000000">
-				<td align="center"><H32O>Data</H32O></td>
+				<td align="center"><H32O>&nbsp</H32O></td>
 				<td align="center"><H32O>Location</H32O></td>
 				<td align="center"><H32O>Servizio</H32O></td>
 				<td align="center"><H32O>Menu</H32O></td>
 				<td align="center"><H32O>Conto</H32O></td>
-			<c:forEach var="resturantScore" items="${resturantScoresList}"> 
+			<c:forEach var="participantScore" items="${participantScoresList}"> 
 		    	<tr>
 					<td align="center"><H5W>&nbsp</H5W></td>
 					<td align="left"><H5W>&nbsp</H5W></td>
@@ -68,11 +70,11 @@
 					<td align="center"><H5W>&nbsp</H5W></td>
 				</tr>
 		    	<tr>
-					<td align="left"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.dinnerDate}</H32W></a></td>
-					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.location}</H32W></a></td>
-					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.service}</H32W></a></td>
-					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.menu}</H32W></a></td>
-					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.bill}</H32W></a></td>
+					<td align="left"><H32W>${participantScore.participant}</H32W></td>
+					<td align="center"><H32W>${participantScore.location}</H32W></td>
+					<td align="center"><H32W>${participantScore.service}</H32W></td>
+					<td align="center"><H32W>${participantScore.menu}</H32W></td>
+					<td align="center"><H32W>${participantScore.bill}</H32W></td>
 				</tr>
 		    </c:forEach> 
 		</table>  

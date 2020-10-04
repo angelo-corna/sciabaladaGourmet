@@ -1,32 +1,18 @@
 package software.trentanove.sciabaladaGourmet.beans;
 
-public class ResturantScore {  
+public class ParticipantScore {  
  
-	private String resturant;  
-	private String city;  
-	private String dinnerDate;  
+	private String Participant;  
 	private float location;  
 	private float service;
 	private float menu;  
 	private float bill;
 	
-	public String getResturant() {
-		return resturant;
+	public String getParticipant() {
+		return Participant;
 	}
-	public void setResturant(String resturant) {
-		this.resturant = resturant;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
-	public String getDinnerDate() {
-		return dinnerDate;
-	}
-	public void setDinnerDate(String dinnerDate) {
-		this.dinnerDate = dinnerDate;
+	public void setParticipant(String participant) {
+		Participant = participant;
 	}
 	public float getLocation() {
 		return location;
