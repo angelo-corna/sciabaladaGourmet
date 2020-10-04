@@ -7,6 +7,13 @@
 		<title>Sciabalada Mobile Gourmet - Classifica</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
 		<link rel="icon" type="image/png" href="../images/sciabalada.ico">
+		
+		<script type="text/javascript">
+			function formatScore(score) {
+				document.write("<td align=\"center\"><a href=\"../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}\"><H32W>"+Math.round(score*Math.pow(10,1))/Math.pow(10,1)+"</H32W></a></td>");
+			}
+		</script>
+
 	</head>
 	<body>
 		<table style="width:100%" bgcolor="#000000">
@@ -68,11 +75,17 @@
 					<td align="center"><H5W>&nbsp</H5W></td>
 				</tr>
 		    	<tr>
-					<td align="left"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.dinnerDate}</H32W></a></td>
-					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.location}</H32W></a></td>
-					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.service}</H32W></a></td>
-					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.menu}</H32W></a></td>
-					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.bill}</H32W></a></td>
+					<td align="center"><a href="../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}"><H32W>${resturantScore.dinnerDate}</H32W></a></td>
+					<script type="text/javascript">
+						var jsScoreLocation = [[${resturantScore.location}]];
+						formatScore(jsScoreLocation);
+						var jsScoreService = [[${resturantScore.service}]];
+						formatScore(jsScoreService);
+						var jsScoreMenu = [[${resturantScore.menu}]];
+						formatScore(jsScoreMenu);
+						var jsScoreBill = [[${resturantScore.bill}]];
+						formatScore(jsScoreBill);
+					</script>			
 				</tr>
 		    </c:forEach> 
 		</table>  

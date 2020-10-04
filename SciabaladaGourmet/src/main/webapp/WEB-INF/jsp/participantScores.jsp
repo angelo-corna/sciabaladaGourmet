@@ -7,6 +7,13 @@
 		<title>Sciabalada Mobile Gourmet - Classifica</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
 		<link rel="icon" type="image/png" href="../images/sciabalada.ico">
+		
+		<script type="text/javascript">
+			function formatScore(score) {
+				document.write("<td align=\"center\"><H32W>"+Math.round(score*Math.pow(10,1))/Math.pow(10,1)+"</H32W></td>");
+			}
+		</script>
+		
 	</head>
 	<body>
 		<table style="width:100%" bgcolor="#000000">
@@ -71,10 +78,21 @@
 				</tr>
 		    	<tr>
 					<td align="left"><H32W>${participantScore.participant}</H32W></td>
-					<td align="center"><H32W>${participantScore.location}</H32W></td>
+					<script type="text/javascript">
+						var jsScoreLocation = [[${participantScore.location}]];
+						formatScore(jsScoreLocation);
+						var jsScoreService = [[${participantScore.service}]];
+						formatScore(jsScoreService);
+						var jsScoreMenu = [[${participantScore.menu}]];
+						formatScore(jsScoreMenu);
+						var jsScoreBill = [[${participantScore.bill}]];
+						formatScore(jsScoreBill);
+					</script>			
+					
+					<!--  td align="center"><H32W>${participantScore.location}</H32W></td>
 					<td align="center"><H32W>${participantScore.service}</H32W></td>
 					<td align="center"><H32W>${participantScore.menu}</H32W></td>
-					<td align="center"><H32W>${participantScore.bill}</H32W></td>
+					<td align="center"><H32W>${participantScore.bill}</H32W></td-->
 				</tr>
 		    </c:forEach> 
 		</table>  
