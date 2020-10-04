@@ -10,7 +10,7 @@
 		
 		<script type="text/javascript">
 			function formatScore(score) {
-				document.write("<td align=\"center\"><a href=\"../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}\"><H32W>"+Math.round(score*Math.pow(10,1))/Math.pow(10,1)+"</H32W></a></td>");
+				document.write("<td align=\"center\"><a href=\"../participantScores/${resturantScore.resturant},${resturantScore.city},${resturantScore.dinnerDate}\"><H32W>"+Math.round(score*Math.pow(10,2))/Math.pow(10,2)+"</H32W></a></td>");
 			}
 		</script>
 
