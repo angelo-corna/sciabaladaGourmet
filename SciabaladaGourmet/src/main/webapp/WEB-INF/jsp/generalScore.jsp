@@ -9,8 +9,12 @@
 		<link rel="icon" type="image/png" href="images/sciabalada.ico">
 		
 		<script type="text/javascript">
+			function formatLink(score) {
+				var scoreFormatted = Math.round(score*Math.pow(10,2))/Math.pow(10,2);
+				document.write("<td align=\"center\"><H32W>"+scoreFormatted+"</H32W></td>");
+			}
 			function formatScore(score) {
-				document.write("<td align=\"center\"><a href=\"resturantScores/${score.resturant},${score.city}\"><H32W>"+Math.round(score*Math.pow(10,2))/Math.pow(10,2)+"</H32W></<a></td>");
+				return Math.round(score*Math.pow(10,1))/Math.pow(10,1);
 			}
 		</script>
 		
@@ -59,7 +63,7 @@
 					<td align="left"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.city}</H32W></<a></td>
 					<script type="text/javascript">
 						var jsScore = [[${score.score}]];
-						formatScore(jsScore);
+						formatLink(jsScore);
 					</script>
 					<!-- td align="center"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.score}</H32W></<a></td -->
 				</tr>
