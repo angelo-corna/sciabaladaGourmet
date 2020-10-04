@@ -2,9 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>software.trentanove</groupId>
-  <artifactId>Sciabalada</artifactId>
+  <artifactId>SciabaladaGourmet</artifactId>
   <packaging>war</packaging>
-  <version>1.0.3.11</version>
+  <version>1.0.1</version>
   <name>Sciabalada Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
