@@ -28,19 +28,19 @@
 			</tr>
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
-			<tr><td align="center"><a href="generalScore">Generale</a></td></tr>
+			<tr><td align="center"><a href="generalScore/general">Generale</a></td></tr>
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
-			<tr><td align="center"><a href="index.jsp">Location</a></td></tr>
+			<tr><td align="center"><a href="generalScore/location">Location</a></td></tr>
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
-			<tr><td align="center"><a href="index.jsp">Menù</a></td></tr>
+			<tr><td align="center"><a href="generalScore/menu">Menù</a></td></tr>
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
-			<tr><td align="center"><a href="index.jsp">Servizio</a></td></tr>
+			<tr><td align="center"><a href="generalScore/service">Servizio</a></td></tr>
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
 			<tr><td align="center" colspan="2"><H2>&nbsp</H2></td></tr>			
-			<tr><td align="center"><a href="index.jsp">Conto</a></td></tr>
+			<tr><td align="center"><a href="generalScore/bill">Conto</a></td></tr>
 		</table>  
 	</body>
 </html>

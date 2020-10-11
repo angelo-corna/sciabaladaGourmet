@@ -186,11 +186,19 @@ public class EvaluationsDao {
 		template.update("update evaluations set bill=? where dinner_id=? and participant=?",new Object[] {eval, dinnerId, participant});
 	} 
 	
-	public List<Score> getGeneralScore(){  
-		String sql = "select d.resturant, d.city, (sum(e.location) + sum(e.service) + sum(e.menu) + sum(e.bill) )/ (count(*)*4) as generalScore "
-				+ "from dinners as d inner join evaluations as e on e.dinner_id=d.id "
-				+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
-				+ "group by d.resturant, d.city order by generalScore desc";
+	public List<Score> getGeneralScore(String scoreType){ 
+		String sql = "";
+		if(scoreType.equals("general")) {
+			sql = "select d.resturant, d.city, (sum(e.location) + sum(e.service) + sum(e.menu) + sum(e.bill) )/ (count(*)*4) as generalScore "
+					+ "from dinners as d inner join evaluations as e on e.dinner_id=d.id "
+					+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
+					+ "group by d.resturant, d.city order by generalScore desc";
+		} else {
+			sql = "select d.resturant, d.city, sum(e."+scoreType+") / count(*) as generalScore "
+					+ "from dinners as d inner join evaluations as e on e.dinner_id=d.id "
+					+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
+					+ "group by d.resturant, d.city order by generalScore desc";
+		}
 		return  template.query(sql,new RowMapper<Score>(){
 	        public Score mapRow(ResultSet rs, int row) throws SQLException {  
 	        	Score s = new Score();  
@@ -202,39 +210,92 @@ public class EvaluationsDao {
 	    }); 
 	} 
 
-	public List<ResturantScore> getResturantScores(String resturant, String city){  
-		String sql = "select d.dinnerDate, sum(e.location)/count(*), sum(e.service)/count(*), sum(e.menu)/count(*), "
-				+ "sum(e.bill)/count(*) from dinners as d inner join evaluations as e on e.dinner_id=d.id "
-				+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
-				+ "and d.resturant=? and d.city=? group by d.dinnerDate order by d.dinnerDate";
+	public List<ResturantScore> getResturantScores(String resturant, String city, String scoreType){  
+		String sql = "";
+		if(scoreType.equals("general")) {
+			sql = "select d.dinnerDate, sum(e.location)/count(*), sum(e.service)/count(*), sum(e.menu)/count(*), "
+					+ "sum(e.bill)/count(*) from dinners as d inner join evaluations as e on e.dinner_id=d.id "
+					+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
+					+ "and d.resturant=? and d.city=? group by d.dinnerDate order by d.dinnerDate";
+		} else {
+			sql = "select d.dinnerDate, sum(e."+scoreType+")/count(*) "
+					+ "from dinners as d inner join evaluations as e on e.dinner_id=d.id "
+					+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
+					+ "and d.resturant=? and d.city=? group by d.dinnerDate order by d.dinnerDate";
+		}	
+		
 		return  template.query(sql, new Object[] {resturant, city}, new RowMapper<ResturantScore>(){
-	        public ResturantScore mapRow(ResultSet rs, int row) throws SQLException {  
-	        	ResturantScore r = new ResturantScore();  
-	        	r.setResturant(resturant);
-	        	r.setCity(city);
-	            r.setDinnerDate(rs.getString(1)); 
-	            r.setLocation(rs.getFloat(2)); 
-	            r.setService(rs.getFloat(3)); 
-	            r.setMenu(rs.getFloat(4)); 
-	            r.setBill(rs.getFloat(5)); 
-	            return r;  
-	        }  
-	    }); 
-	} 
+		       public ResturantScore mapRow(ResultSet rs, int row) throws SQLException {  
+		       	ResturantScore r = new ResturantScore();  
+		       	r.setResturant(resturant);
+		       	r.setCity(city);
+		        r.setDinnerDate(rs.getString(1)); 
+		            
+				switch (scoreType) {
+				  	case "general":
+			            r.setLocation(rs.getFloat(2)); 
+			            r.setService(rs.getFloat(3)); 
+			            r.setMenu(rs.getFloat(4)); 
+			            r.setBill(rs.getFloat(5)); 
+					    break;
+		       		case "location":
+			            r.setLocation(rs.getFloat(2)); 
+			            break;
+				  	case "menu":
+			            r.setMenu(rs.getFloat(2)); 
+			            break;
+					case "service":
+			            r.setService(rs.getFloat(2)); 
+			            break;
+					case "bill":
+			            r.setBill(rs.getFloat(2)); 
+			            break;
+					}
+			       return r;  
+		       }
+		}); 
+	}
 	
-	public List<ParticipantScore> getParticipantScores(String resturant, String city, String dinnerDate){  
-		String sql = "select  e.participant, e.location, e.service, e.menu, e.bill "
+	
+	public List<ParticipantScore> getParticipantScores(String resturant, String city, String dinnerDate, String scoreType){  
+		String sql = "";
+		if(scoreType.equals("general")) {
+			sql = "select  e.participant, e.location, e.service, e.menu, e.bill "
 				+ "from dinners as d inner join evaluations as e on e.dinner_id=d.id "
 				+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
 				+ "and d.resturant=? and d.city=? and d.dinnerDate=? order by participant";
+		} else {
+			sql = "select  e.participant, e."+scoreType+" "
+					+ "from dinners as d inner join evaluations as e on e.dinner_id=d.id "
+					+ "where e.location is not NULL and e.menu is not NULL and e.service is not null and e.bill is not null "
+					+ "and d.resturant=? and d.city=? and d.dinnerDate=? order by participant";
+		}
 		return  template.query(sql, new Object[] {resturant, city, dinnerDate}, new RowMapper<ParticipantScore>(){
 	        public ParticipantScore mapRow(ResultSet rs, int row) throws SQLException {  
+
 	        	ParticipantScore p = new ParticipantScore();  
 	            p.setParticipant(rs.getString(1)); 
-	            p.setLocation(rs.getFloat(2)); 
-	            p.setService(rs.getFloat(3)); 
-	            p.setMenu(rs.getFloat(4)); 
-	            p.setBill(rs.getFloat(5)); 
+
+				switch (scoreType) {
+			  	case "general":
+		            p.setLocation(rs.getFloat(2)); 
+		            p.setService(rs.getFloat(3)); 
+		            p.setMenu(rs.getFloat(4)); 
+		            p.setBill(rs.getFloat(5)); 
+				    break;
+	       		case "location":
+		            p.setLocation(rs.getFloat(2)); 
+		            break;
+			  	case "menu":
+		            p.setMenu(rs.getFloat(2)); 
+		            break;
+				case "service":
+		            p.setService(rs.getFloat(2)); 
+		            break;
+				case "bill":
+		            p.setBill(rs.getFloat(2)); 
+		            break;
+				}
 	            return p;  
 	        }  
 	    }); 

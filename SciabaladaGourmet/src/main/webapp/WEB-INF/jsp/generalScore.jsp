@@ -6,7 +6,7 @@
 	<head>
 		<title>Sciabalada Mobile Gourmet - Classifica</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css">
-		<link rel="icon" type="image/png" href="images/sciabalada.ico">
+		<link rel="../icon" type="image/png" href="../images/sciabalada.ico">
 		
 		<script type="text/javascript">
 			function formatLink(score) {
@@ -16,15 +16,40 @@
 			function formatScore(score) {
 				return Math.round(score*Math.pow(10,1))/Math.pow(10,1);
 			}
+			
+			function formatTitle(scoreType) {
+
+				var titleType = "";
+				
+				switch (scoreType) {
+				  case "general":
+				    	titleType = "Generale";
+				    	break;
+				  case "location":
+					 	titleType = "Location";
+					    break;
+				  case "menu":
+					    titleType = "Menu";
+					    break;
+				  case "service":
+					    titleType = "Servizio";
+					    break;
+				  case "bill":
+					    titleType = "Conto";
+					    break;
+				}
+				
+				document.write("<td align=\"center\"><H1O> Classifica " + titleType + " </H1O></td>");
+			}
 		</script>
 		
 	</head>
 	<body>
 		<table style="width:100%" bgcolor="#000000">
 			<tr>
-		  		<td align="right"><img src="images/chart.png"></td>
+		  		<td align="right"><img src="../images/chart.png"></td>
 		  		<td align="left"><H32W>&nbsp&nbsp&nbspClassifica</H32W></td>
-		  		<td align="right"><a href="index.jsp"><img src="images/home.png"></a></td>
+		  		<td align="right"><a href="../index.jsp"><img src="../images/home.png"></a></td>
 		  		<td align="right">&nbsp&nbsp&nbsp&nbsp&nbsp</td>
 			</tr>
 		</table>
@@ -34,9 +59,12 @@
 				<td><H4O>&nbsp</H4O></td>
 			</tr>
 			<tr>
-				<td align="center">
-					<H1O> Classifica Generale </H1O>
-				</td>
+				<script type="text/javascript">
+					/*<![CDATA[*/ 
+						var jsType = '${scoreType}';
+						formatTitle(jsType);
+					/*]]>*/	
+				</script>
 			</tr>
 			<tr>
 				<td align="center"><H32O>Totale ristoranti valutati: ${totalScores}</H32O></td>
@@ -59,13 +87,12 @@
 					<td align="center"><H5W>&nbsp</H5W></td>
 				</tr>
 		    	<tr>
-					<td align="left"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.resturant}</H32W></<a></td>
-					<td align="left"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.city}</H32W></<a></td>
+					<td align="left"><a href="resturantScores/${score.resturant},${score.city},${scoreType}"><H32W>${score.resturant}</H32W></<a></td>
+					<td align="left"><a href="resturantScores/${score.resturant},${score.city},${scoreType}"><H32W>${score.city}</H32W></<a></td>
 					<script type="text/javascript">
 						var jsScore = [[${score.score}]];
 						formatLink(jsScore);
 					</script>
-					<!-- td align="center"><a href="resturantScores/${score.resturant},${score.city}"><H32W>${score.score}</H32W></<a></td -->
 				</tr>
 		    </c:forEach> 
 		</table>  

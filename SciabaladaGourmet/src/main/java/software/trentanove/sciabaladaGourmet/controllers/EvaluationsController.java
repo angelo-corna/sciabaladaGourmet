@@ -260,39 +260,45 @@ public class EvaluationsController {
         return "score";  
     } 
 
-    @RequestMapping("generalScore")  
-    public String generalScore(Model m){  
-    	List<Score> scoreList = dao.getGeneralScore();
+    @RequestMapping("generalScore/{scoreType}")  
+    public String generalScore(@PathVariable String scoreType, Model m){  
+    	List<Score> scoreList = dao.getGeneralScore(scoreType);
+    	m.addAttribute("scoreType", scoreType);
     	m.addAttribute("scoreList", scoreList);
     	m.addAttribute("totalScores", scoreList.size());
         return "generalScore";  
     } 
     
-    @RequestMapping("resturantScores/{resturant}")  
+    @RequestMapping("generalScore/resturantScores/{resturant}")  
     public String resturantScores(@PathVariable String resturant, Model m){  
-       	//get resturant and city
+    	
+    	//get resturant and city
     	String rest = resturant.split(",")[0];
     	String city = resturant.split(",")[1];
+    	String scoreType = resturant.split(",")[2];
     	
-    	List<ResturantScore> resturantScoresList = dao.getResturantScores(rest, city);
+    	List<ResturantScore> resturantScoresList = dao.getResturantScores(rest, city, scoreType);
     	m.addAttribute("resturant", rest);
     	m.addAttribute("city", city);
+    	m.addAttribute("scoreType", scoreType);
     	m.addAttribute("resturantScoresList", resturantScoresList);
     	m.addAttribute("totalResturantScores", resturantScoresList.size());
         return "resturantScores";  
     } 
     
-    @RequestMapping("participantScores/{allData}")  
+    @RequestMapping("generalScore/participantScores/{allData}")  
     public String participantScores(@PathVariable String allData, Model m){  
        	//get resturant, city and dinnerDate
     	String resturant = allData.split(",")[0];
     	String city = allData.split(",")[1];
     	String dinnerDate = allData.split(",")[2];
+    	String scoreType = allData.split(",")[3];
     	
-    	List<ParticipantScore> participantScoresList = dao.getParticipantScores(resturant, city, dinnerDate);
+    	List<ParticipantScore> participantScoresList = dao.getParticipantScores(resturant, city, dinnerDate, scoreType);
     	m.addAttribute("resturant", resturant);
     	m.addAttribute("city", city);
     	m.addAttribute("dinnerDate", dinnerDate);
+    	m.addAttribute("scoreType", scoreType);
     	m.addAttribute("participantScoresList", participantScoresList);
     	m.addAttribute("totalparticipantScores", participantScoresList.size());
         return "participantScores";  
