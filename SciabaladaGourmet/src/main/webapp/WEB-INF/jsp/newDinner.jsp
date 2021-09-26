@@ -85,7 +85,13 @@
 							<td align="left"><form:checkbox path="participants" value="Co" label=" Co" id="co"/>  </td>
 						</tr>
 						<tr>
+							<td align="left"><form:checkbox path="participants" value="Karmen" label=" Karmen" id="karmen"/>   </td>
+						</tr>
+						<tr>
 							<td align="left"><form:checkbox path="participants" value="Katia" label=" Katia" id="katia"/>   </td>
+						</tr>
+						<tr>
+							<td align="left"><form:checkbox path="participants" value="Marco" label=" Mario" id="marco"/></td>
 						</tr>
 						<tr>
 							<td align="left"><form:checkbox path="participants" value="Mario" label=" Mario" id="mario"/></td>
@@ -138,7 +144,9 @@
 	
 	var angelo = document.getElementById('angelo');
 	var co = document.getElementById('co');
+	var karmen = document.getElementById('karmen');
 	var katia = document.getElementById('katia');
+	var mario = document.getElementById('marco');
 	var mario = document.getElementById('mario');
 	var mauro = document.getElementById('mauro');
 	var renzo = document.getElementById('renzo');
@@ -214,7 +222,9 @@
 		var numParticipants = 0;
 		if(angelo.checked){numParticipants++;}
 		if(co.checked){numParticipants++;}
+		if(karmen.checked){numParticipants++;}
 		if(katia.checked){numParticipants++;}
+		if(marco.checked){numParticipants++;}
 		if(mario.checked){numParticipants++;}
 		if(mauro.checked){numParticipants++;}
 		if(renzo.checked){numParticipants++;}
