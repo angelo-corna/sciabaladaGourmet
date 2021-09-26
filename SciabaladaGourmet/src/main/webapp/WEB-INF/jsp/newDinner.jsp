@@ -91,7 +91,7 @@
 							<td align="left"><form:checkbox path="participants" value="Katia" label=" Katia" id="katia"/>   </td>
 						</tr>
 						<tr>
-							<td align="left"><form:checkbox path="participants" value="Marco" label=" Mario" id="marco"/></td>
+							<td align="left"><form:checkbox path="participants" value="Marco" label=" Marco" id="marco"/></td>
 						</tr>
 						<tr>
 							<td align="left"><form:checkbox path="participants" value="Mario" label=" Mario" id="mario"/></td>
