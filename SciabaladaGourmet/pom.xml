@@ -54,7 +54,7 @@
     
   </dependencies>
   <build>
-	<finalName>SpringMVCPagination</finalName>
+	<finalName>sciabaladaGourmet</finalName>
 	    
 	<plugins>
 	  <plugin>
